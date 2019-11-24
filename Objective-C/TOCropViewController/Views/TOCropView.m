@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
 
 - (void)setup
 {
-    __weak typeof(self) weakSelf = self;
+    __typeof(self) __weak weakSelf = self;
     
     BOOL circularMode = (self.croppingStyle == TOCropViewCroppingStyleCircular);
     
@@ -1321,9 +1321,9 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     offset.x = MAX(-cropFrame.origin.x, offset.x);
     offset.y = MAX(-cropFrame.origin.y, offset.y);
     
-    __weak typeof(self) weakSelf = self;
+    __typeof(self) __weak weakSelf = self;
     void (^translateBlock)(void) = ^{
-        typeof(self) strongSelf = weakSelf;
+        __typeof(self) __strong strongSelf = weakSelf;
         
         // Setting these scroll view properties will trigger
         // the foreground matching method via their delegates,

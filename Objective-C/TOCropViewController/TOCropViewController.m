@@ -122,7 +122,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     self.toolbar.rotateClockwiseButtonHidden = self.rotateClockwiseButtonHidden;
     
     // Set up the toolbar button actions
-    __weak typeof(self) weakSelf = self;
+    __typeof(self) __weak weakSelf = self;
     self.toolbar.doneButtonTapped   = ^{ [weakSelf doneButtonTapped]; };
     self.toolbar.cancelButtonTapped = ^{ [weakSelf cancelButtonTapped]; };
     self.toolbar.resetButtonTapped = ^{ [weakSelf resetCropViewLayout]; };
@@ -730,12 +730,12 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
         self.imageCropFrame = toFrame;
     }
     
-    __weak typeof (self) weakSelf = self;
+    __typeof(self) __weak weakSelf = self;
     [viewController presentViewController:self.parentViewController ? self.parentViewController : self
                                  animated:YES
                                completion:^
     {
-        typeof (self) strongSelf = weakSelf;
+        __typeof(self) __strong strongSelf = weakSelf;
         if (completion) {
             completion();
         }
@@ -790,9 +790,9 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     
     self.cropView.simpleRenderMode = YES;
     
-    __weak typeof (self) weakSelf = self;
+    __typeof(self) __weak weakSelf = self;
     self.transitionController.prepareForTransitionHandler = ^{
-        typeof (self) strongSelf = weakSelf;
+        __typeof(self) __strong strongSelf = weakSelf;
         TOCropViewControllerTransitioning *transitioning = strongSelf.transitionController;
 
         transitioning.toFrame = [strongSelf.cropView convertRect:strongSelf.cropView.cropBoxFrame toView:strongSelf.view];
@@ -817,9 +817,9 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
         return nil;
     }
     
-    __weak typeof (self) weakSelf = self;
+    __typeof(self) __weak weakSelf = self;
     self.transitionController.prepareForTransitionHandler = ^{
-        typeof (self) strongSelf = weakSelf;
+        __typeof(self) __strong strongSelf = weakSelf;
         TOCropViewControllerTransitioning *transitioning = strongSelf.transitionController;
         
         if (!CGRectIsEmpty(transitioning.toFrame) || transitioning.toView) {
@@ -857,16 +857,16 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     NSString *yesButtonTitle = NSLocalizedStringFromTableInBundle(@"Delete Changes", @"TOCropViewControllerLocalizable", resourceBundle, nil);
     NSString *noButtonTitle = NSLocalizedStringFromTableInBundle(@"Cancel", @"TOCropViewControllerLocalizable", resourceBundle, nil);
 
-    __weak typeof (self) weakSelf = self;
+    //__weak __typeof (self) weakSelf = self;
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:yesButtonTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        [weakSelf dismissCropViewController];
+        [self dismissCropViewController];
     }];
     [alertController addAction:yesAction];
 
     UIAlertAction *noAction = [UIAlertAction actionWithTitle:noButtonTitle style:UIAlertActionStyleCancel handler:nil];
     [alertController addAction:noAction];
 
-    [weakSelf presentViewController:alertController animated:YES completion: nil];
+    [self presentViewController:alertController animated:YES completion: nil];
 }
 
 - (void)dismissCropViewController
@@ -920,7 +920,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
         activityController.popoverPresentationController.sourceRect = self.toolbar.doneButtonFrame;
         [self presentViewController:activityController animated:YES completion:nil];
 
-        __weak typeof(activityController) blockController = activityController;
+        __typeof(activityController) __weak blockController = activityController;
 
         activityController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
             if (!completed) {
