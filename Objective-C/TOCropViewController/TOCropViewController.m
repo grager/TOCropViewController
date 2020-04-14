@@ -27,6 +27,8 @@
 #import "UIImage+CropRotate.h"
 #import "TOCroppedImageAttributes.h"
 
+#import "UIViewController-Extensions.h"
+
 static const CGFloat kTOCropViewControllerTitleTopPadding = 14.0f;
 static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 
@@ -617,11 +619,8 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
         UIAlertAction *action = [UIAlertAction actionWithTitle:itemStrings[i] style:UIAlertActionStyleDefault handler:handlerBlock];
         [alertController addAction:action];
     }
-
-    alertController.modalPresentationStyle = UIModalPresentationPopover;
-    UIPopoverPresentationController *presentationController = [alertController popoverPresentationController];
-    presentationController.sourceView = self.toolbar;
-    presentationController.sourceRect = self.toolbar.clampButtonFrame;
+    
+    [alertController enablePopoverPresentationWithDelegate:nil withSourceView:self.toolbar withSourceRect:self.toolbar.clampButtonFrame withButtonBar:nil];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
