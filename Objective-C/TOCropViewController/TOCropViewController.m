@@ -32,7 +32,7 @@
 static const CGFloat kTOCropViewControllerTitleTopPadding = 14.0f;
 static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 
-@interface TOCropViewController () <UIActionSheetDelegate, UIViewControllerTransitioningDelegate, TOCropViewDelegate>
+@interface TOCropViewController () <UIViewControllerTransitioningDelegate, TOCropViewDelegate>
 
 /* The target image */
 @property (nonatomic, readwrite) UIImage *image;
@@ -608,6 +608,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     }
 
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
     [alertController addAction:[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:nil]];
 
     //Add each item to the alert controller
